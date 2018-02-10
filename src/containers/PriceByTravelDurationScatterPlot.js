@@ -5,7 +5,14 @@ import ScatterPlot from '../components/ScatterPlot';
 
 class PriceByTravelDurationScatterPlot extends Component {
   render() {
-    const { data, onHover, onClick, width, visitedNodes } = this.props;
+    const {
+      data,
+      onHover,
+      onClick,
+      width,
+      visitedNodes,
+      maxHeight
+    } = this.props;
 
     const scatterPlotData = data.map((item, index) => {
       return {
@@ -21,7 +28,7 @@ class PriceByTravelDurationScatterPlot extends Component {
       };
     });
 
-    const height = width / 2;
+    const height = maxHeight;
 
     return <ScatterPlot extent={{ width, height }} data={scatterPlotData} />;
   }
