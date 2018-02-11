@@ -1,0 +1,19 @@
+{
+  "name": "feeling-lucky-visualizer-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "client": "cd client && npm start",
+    "server": "node index.js",
+    "bot": "node simple-bot.js",
+    "start":
+      "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
+  },
+  "dependencies": {
+    "build-url": "^1.0.10",
+    "concurrently": "^3.5.1",
+    "express": "^4.16.2",
+    "scrape-it": "^5.0.2"
+  }
+}
