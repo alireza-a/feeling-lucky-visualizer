@@ -36,7 +36,7 @@ class PriceByTravelDurationScatterPlot extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const { data, visitedNodes } = state;
-  return { data, visitedNodes };
+  return { data: data.filter(d => d.duration), visitedNodes };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {

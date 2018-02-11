@@ -4,6 +4,10 @@ const data = (state = [], action) => {
   switch (action.type) {
     case 'SET_DATA':
       return action.data;
+    case 'SET_TRAVEL_DURATION':
+      return state.map((item, index) =>
+        Object.assign({}, state, { duration: action.durations[index] })
+      );
     default:
       return state;
   }

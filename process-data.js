@@ -34,7 +34,6 @@ getDurations(locations)
       });
     });
   })
-  .then(data => data.filter(d => d.duration !== undefined))
   .then(data => {
     fs.writeFile('./src/data.json', JSON.stringify(data), 'utf8', err =>
       console.log(err)

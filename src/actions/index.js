@@ -1,27 +1,24 @@
-export const setData = data => {
-  return {
-    type: 'SET_DATA',
-    data
-  };
-};
+export const setData = data => ({
+  type: 'SET_DATA',
+  data
+});
 
-export const selectNode = node => {
-  return {
-    type: 'SELECT_NODE',
-    node
-  };
-};
+export const selectNode = node => ({
+  type: 'SELECT_NODE',
+  node
+});
 
-export const visitNode = node => {
-  return {
-    type: 'VISIT_NODE',
-    node
-  };
-};
+export const visitNode = node => ({
+  type: 'VISIT_NODE',
+  node
+});
 
-export const setDestination = destination => {
-  return {
-    type: 'SET_DESTINATION',
-    destination
-  };
-};
+export const setDestination = destination => ({
+  type: 'SET_DESTINATION',
+  destination
+});
+
+export const setTravelDuration = durations => ({
+  type: 'SET_TRAVEL_DURATION',
+  durations
+});
