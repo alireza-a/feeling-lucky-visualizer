@@ -2,12 +2,29 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setDestination } from '../actions';
 import TextField from 'material-ui/TextField';
+import { key } from '../config.json';
 
 class SearchBar extends Component {
   constructor(props) {
     super(props);
+    this.geoLocation = this.geoLocation.bind(this);
     this.state = {};
   }
+
+  geoLocation(address) {
+    fetch(
+      `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${key}`
+    )
+      .then(res => res.json())
+      .then(res => res.results[0].geometry.location)
+      .then(loc => {
+        this.props.onEnter({
+          latitude: loc.lat,
+          longitude: loc.lng
+        });
+      });
+  }
+
   render() {
     // To read TextField value when users presses enter
     // https://github.com/mui-org/material-ui/issues/5393
@@ -18,11 +35,7 @@ class SearchBar extends Component {
         inputRef={el => (this.el = el)}
         onKeyPress={ev => {
           if (ev.key === 'Enter') {
-            const [latitude, longitude] = this.el.value.split(',');
-            this.props.onEnter({
-              latitude: latitude,
-              longitude: longitude
-            });
+            this.geoLocation(this.el.value);
             ev.preventDefault();
           }
         }}

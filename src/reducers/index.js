@@ -27,7 +27,7 @@ const visitedNodes = (state = [], action) => {
   }
 };
 
-const destination = (state = 0, action) => {
+const destination = (state = {}, action) => {
   switch (action.type) {
     case 'SET_DESTINATION':
       return action.destination;
