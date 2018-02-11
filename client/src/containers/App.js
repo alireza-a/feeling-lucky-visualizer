@@ -131,9 +131,10 @@ class App extends Component {
 const mapStateToProps = (state, ownProps) => {
   const isMissingData = state.data.length === 0;
   const isMissingDestination = state.destination.latitude === undefined;
+  const isMissingActiveNode = state.activeNode === undefined;
   return {
-    displayStatic: isMissingData || isMissingDestination,
-    message: 'Run the bot and enter your destination'
+    displayStatic: isMissingData || isMissingDestination || isMissingActiveNode,
+    message: 'Please enter your destination'
   };
 };
 

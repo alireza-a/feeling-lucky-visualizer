@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { setDestination } from '../actions';
+import { setDestination, setData, selectNode } from '../actions';
 import TextField from 'material-ui/TextField';
-import { key } from '../config.json';
 
 class SearchBar extends Component {
   constructor(props) {
@@ -12,16 +11,12 @@ class SearchBar extends Component {
   }
 
   geoLocation(address) {
-    fetch(
-      `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${key}`
-    )
+    fetch(`/api/items?destination=${address}`)
       .then(res => res.json())
-      .then(res => res.results[0].geometry.location)
-      .then(loc => {
-        this.props.onEnter({
-          latitude: loc.lat,
-          longitude: loc.lng
-        });
+      .then(({ data, destination }) => {
+        this.props.selectNode(data[0]);
+        this.props.setDestination(destination);
+        this.props.setData(data);
       });
   }
 
@@ -46,7 +41,9 @@ class SearchBar extends Component {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    onEnter: newDestination => dispatch(setDestination(newDestination))
+    setDestination: newDestination => dispatch(setDestination(newDestination)),
+    setData: data => dispatch(setData(data)),
+    selectNode: node => dispatch(selectNode(node))
   };
 };
 

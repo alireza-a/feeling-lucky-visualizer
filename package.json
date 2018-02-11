@@ -7,13 +7,14 @@
     "client": "cd client && npm start",
     "server": "node index.js",
     "bot": "node simple-bot.js",
-    "start":
-      "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
+    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
   },
   "dependencies": {
     "build-url": "^1.0.10",
     "concurrently": "^3.5.1",
     "express": "^4.16.2",
+    "lodash": "^4.17.5",
+    "node-fetch": "^2.0.0",
     "scrape-it": "^5.0.2"
   }
 }

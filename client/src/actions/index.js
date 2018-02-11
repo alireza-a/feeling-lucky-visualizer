@@ -13,12 +13,11 @@ export const visitNode = node => ({
   node
 });
 
+export const clearVisitedNodes = () => ({
+  type: 'CLEARE_VISITED_NODES'
+});
+
 export const setDestination = destination => ({
   type: 'SET_DESTINATION',
   destination
-});
-
-export const setTravelDuration = durations => ({
-  type: 'SET_TRAVEL_DURATION',
-  durations
 });

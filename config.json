@@ -1,4 +1,5 @@
 {
+  "key": "Google Maps API Key",
   "bot": {
     "path": "URL without parameters",
     "params": {},
