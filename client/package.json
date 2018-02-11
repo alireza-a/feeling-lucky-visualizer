@@ -2,6 +2,7 @@
   "name": "feeling-lucky-visualizer",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:5000/",
   "dependencies": {
     "d3": "^4.13.0",
     "google-maps-react": "^1.1.2",
@@ -14,7 +15,7 @@
     "redux": "^3.7.2"
   },
   "scripts": {
-    "start": "node process-data.js && react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

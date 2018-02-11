@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import { withStyles } from 'material-ui/styles';
 import Paper from 'material-ui/Paper';
@@ -68,37 +69,52 @@ class App extends Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, displayStatic, message } = this.props;
     const width = this.getComponentWidth();
     const maxHeight = this.getComponentMaxHeight();
+
+    const wrapInPaper = comp => {
+      return (
+        <Grid item xs={12}>
+          <Paper
+            className={classes.paper}
+            style={
+              // https://stackoverflow.com/questions/8865458/how-do-i-vertically-center-text-with-css
+              displayStatic
+                ? {
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: 400
+                  }
+                : {}
+            }
+          >
+            {displayStatic ? message : comp}
+          </Paper>
+        </Grid>
+      );
+    };
 
     return (
       <div className={classes.root}>
         <Grid container spacing={spacing}>
           <Grid item xs={12} md={6}>
             <Grid container spacing={spacing}>
-              <Grid item xs={12}>
-                <Paper className={classes.paper}>
-                  <PriceByTravelDurationScatterPlot
-                    width={width}
-                    maxHeight={maxHeight}
-                  />
-                </Paper>
-              </Grid>
-              <Grid item xs={12}>
-                <Paper className={classes.paper}>
-                  <ImageGrid width={width} maxHeight={maxHeight} />
-                </Paper>
-              </Grid>
+              {wrapInPaper(
+                <PriceByTravelDurationScatterPlot
+                  width={width}
+                  maxHeight={maxHeight}
+                />
+              )}
+              {wrapInPaper(<ImageGrid width={width} maxHeight={maxHeight} />)}
             </Grid>
           </Grid>
           <Grid item xs={12} md={6}>
             <Grid container spacing={spacing}>
-              <Grid item xs={12}>
-                <Paper className={classes.paper}>
-                  <ShortestDistanceMap width={width} maxHeight={maxHeight} />
-                </Paper>
-              </Grid>
+              {wrapInPaper(
+                <ShortestDistanceMap width={width} maxHeight={maxHeight} />
+              )}
               <Grid item xs={12}>
                 <Paper className={classes.paper}>
                   <SearchBar />
@@ -112,4 +128,13 @@ class App extends Component {
   }
 }
 
-export default withStyles(styles)(App);
+const mapStateToProps = (state, ownProps) => {
+  const isMissingData = state.data.length === 0;
+  const isMissingDestination = state.destination.latitude === undefined;
+  return {
+    displayStatic: isMissingData || isMissingDestination,
+    message: 'Run the bot and enter your destination'
+  };
+};
+
+export default connect(mapStateToProps, () => ({}))(withStyles(styles)(App));
