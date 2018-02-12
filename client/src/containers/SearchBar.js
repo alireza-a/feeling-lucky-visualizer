@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withStyles } from 'material-ui/styles';
 import { setDestination, setData, selectNode } from '../actions';
 import TextField from 'material-ui/TextField';
+
+const styles = {
+  input: {
+    color: 'white'
+  }
+};
 
 class SearchBar extends Component {
   constructor(props) {
     super(props);
-    this.geoLocation = this.geoLocation.bind(this);
+    this.getData = this.getData.bind(this);
     this.state = {};
   }
 
-  geoLocation(address) {
+  getData(address) {
     fetch(`/api/items?destination=${address}`)
       .then(res => res.json())
       .then(({ data, destination }) => {
@@ -21,18 +28,19 @@ class SearchBar extends Component {
   }
 
   render() {
+    const { classes } = this.props;
     // To read TextField value when users presses enter
-    // https://github.com/mui-org/material-ui/issues/5393
-    // https://stackoverflow.com/questions/31446751/how-to-get-password-field-value-in-reacts-material-ui/47329368#47329368
+    // https://github.com/mui-org/material-ui/issues/5393#issuecomment-304707345
     return (
       <TextField
-        placeholder="Search for your destination"
         autoFocus
         fullWidth
+        inputProps={{ className: classes.input }}
+        placeholder="Search for your destination"
         inputRef={el => (this.el = el)}
         onKeyPress={ev => {
           if (ev.key === 'Enter') {
-            this.geoLocation(this.el.value);
+            this.getData(this.el.value);
             ev.preventDefault();
           }
         }}
@@ -49,4 +57,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   };
 };
 
-export default connect(() => ({}), mapDispatchToProps)(SearchBar);
+export default connect(() => ({}), mapDispatchToProps)(
+  withStyles(styles)(SearchBar)
+);
