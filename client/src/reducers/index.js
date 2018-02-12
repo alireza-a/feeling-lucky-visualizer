@@ -8,7 +8,7 @@ const rootReducer = (
     destination: null,
     isFecthing: false,
     fetched: false,
-    error: null
+    error: false
   },
   action
 ) => {
@@ -22,13 +22,13 @@ const rootReducer = (
         visitedNodes: [],
         isFecthing: false,
         fetched: true,
-        error: null
+        error: false
       });
     case REQUEST_DATA:
       return Object.assign({}, state, {
         isFecthing: true,
         fetched: false,
-        error: null
+        error: false
       });
     case SELECT_NODE:
       return Object.assign({}, state, {

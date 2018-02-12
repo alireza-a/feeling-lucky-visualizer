@@ -9,7 +9,7 @@ import rootReducer from './reducers';
 import './index.css';
 import App from './containers/App';
 
-let store = createStore(
+const store = createStore(
   rootReducer,
   undefined,
   applyMiddleware(thunkMiddleware)
