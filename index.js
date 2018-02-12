@@ -69,7 +69,7 @@ app.get('/api/items', (req, res) => {
         );
 
         res.json({
-          data: itemsWithDuration,
+          nodes: itemsWithDuration,
           destination: { latitude: des.lat, longitude: des.lng }
         });
       })

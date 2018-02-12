@@ -6,7 +6,7 @@ import ScatterPlot from '../components/ScatterPlot';
 class PriceByTravelDurationScatterPlot extends Component {
   render() {
     const {
-      data,
+      nodes,
       onHover,
       onClick,
       width,
@@ -14,7 +14,7 @@ class PriceByTravelDurationScatterPlot extends Component {
       maxHeight
     } = this.props;
 
-    const scatterPlotData = data.map((item, index) => {
+    const scatterPlotData = nodes.map((item, index) => {
       return {
         x: item.duration,
         y: item.price,
@@ -35,8 +35,8 @@ class PriceByTravelDurationScatterPlot extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const { data, visitedNodes } = state;
-  return { data, visitedNodes };
+  const { nodes, visitedNodes } = state;
+  return { nodes, visitedNodes };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {

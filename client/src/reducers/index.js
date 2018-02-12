@@ -1,8 +1,8 @@
-import { SET_DATA, SELECT_NODE, VISIT_NODE } from '../actions';
+import { SET_DATA, SELECT_NODE, VISIT_NODE, REQUEST_DATA } from '../actions';
 
 const rootReducer = (
   state = {
-    data: [],
+    nodes: [],
     activeNode: null,
     visitedNodes: [],
     destination: null,
@@ -14,14 +14,20 @@ const rootReducer = (
 ) => {
   switch (action.type) {
     case SET_DATA:
-      const data = action.data;
+      const { nodes, destination } = action.data;
       return Object.assign({}, state, {
-        data: data.data,
-        activeNode: data.data[0],
-        destination: data.destination,
+        nodes: nodes,
+        activeNode: nodes[0],
+        destination: destination,
         visitedNodes: [],
         isFecthing: false,
         fetched: true,
+        error: null
+      });
+    case REQUEST_DATA:
+      return Object.assign({}, state, {
+        isFecthing: true,
+        fetched: false,
         error: null
       });
     case SELECT_NODE:

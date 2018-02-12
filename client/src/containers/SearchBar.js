@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withStyles } from 'material-ui/styles';
-import { setData } from '../actions';
+import { fetchData } from '../actions';
 import TextField from 'material-ui/TextField';
 
 const styles = {
@@ -13,16 +13,7 @@ const styles = {
 class SearchBar extends Component {
   constructor(props) {
     super(props);
-    this.getData = this.getData.bind(this);
     this.state = {};
-  }
-
-  getData(address) {
-    fetch(`/api/items?destination=${address}`)
-      .then(res => res.json())
-      .then(({ data, destination }) => {
-        this.props.setData({ data, destination });
-      });
   }
 
   render() {
@@ -38,7 +29,8 @@ class SearchBar extends Component {
         inputRef={el => (this.el = el)}
         onKeyPress={ev => {
           if (ev.key === 'Enter') {
-            this.getData(this.el.value);
+            const address = this.el.value;
+            this.props.fetchData(address);
             ev.preventDefault();
           }
         }}
@@ -49,7 +41,7 @@ class SearchBar extends Component {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    setData: data => dispatch(setData(data))
+    fetchData: address => dispatch(fetchData(address))
   };
 };
 
