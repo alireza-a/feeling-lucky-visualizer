@@ -22,11 +22,8 @@ const App = props => {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  const isMissingData = state.data.length === 0;
-  const isMissingDestination = state.destination.latitude === undefined;
-  const isMissingActiveNode = state.activeNode === undefined;
   return {
-    displayStatic: isMissingData || isMissingDestination || isMissingActiveNode,
+    displayStatic: state.fetched === false,
     message: 'Please enter your destination'
   };
 };

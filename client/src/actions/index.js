@@ -1,23 +1,18 @@
+export const SET_DATA = 'SET_DATA';
+export const SELECT_NODE = 'SELECT_NODE';
+export const VISIT_NODE = 'VISIT_NODE';
+
 export const setData = data => ({
-  type: 'SET_DATA',
+  type: SET_DATA,
   data
 });
 
 export const selectNode = node => ({
-  type: 'SELECT_NODE',
+  type: SELECT_NODE,
   node
 });
 
 export const visitNode = node => ({
-  type: 'VISIT_NODE',
+  type: VISIT_NODE,
   node
-});
-
-export const clearVisitedNodes = () => ({
-  type: 'CLEARE_VISITED_NODES'
-});
-
-export const setDestination = destination => ({
-  type: 'SET_DESTINATION',
-  destination
 });

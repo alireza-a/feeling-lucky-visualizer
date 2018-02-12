@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withStyles } from 'material-ui/styles';
-import { setDestination, setData, selectNode } from '../actions';
+import { setData } from '../actions';
 import TextField from 'material-ui/TextField';
 
 const styles = {
@@ -21,9 +21,7 @@ class SearchBar extends Component {
     fetch(`/api/items?destination=${address}`)
       .then(res => res.json())
       .then(({ data, destination }) => {
-        this.props.selectNode(data[0]);
-        this.props.setDestination(destination);
-        this.props.setData(data);
+        this.props.setData({ data, destination });
       });
   }
 
@@ -51,9 +49,7 @@ class SearchBar extends Component {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    setDestination: newDestination => dispatch(setDestination(newDestination)),
-    setData: data => dispatch(setData(data)),
-    selectNode: node => dispatch(selectNode(node))
+    setData: data => dispatch(setData(data))
   };
 };
 
