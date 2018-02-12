@@ -49,7 +49,7 @@ function getDestination(address) {
 
 // zip the data and durations by adding a duration parameter to each item
 function injectDuration(data, durations) {
-  data.map((item, index) => {
+  return data.map((item, index) => {
     return Object.assign({}, item, { duration: durations[index] });
   });
 }
