@@ -1,5 +1,4 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const fetch = require('node-fetch');
 const _ = require('lodash');
 
@@ -8,8 +7,6 @@ const data = require('./data.json');
 const origins = data.map(house => `${house.latitude},${house.longitude}`);
 
 const app = express();
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
 
 const request = (origins, destination, mode = 'transit') => {
   const url = `https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${origins}&destinations=${destination}&key=${key}&mode=${mode}`;
