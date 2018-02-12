@@ -8,30 +8,27 @@ import { CircularProgress } from 'material-ui/Progress';
 import blue from 'material-ui/colors/blue';
 
 const App = props => {
-  const { error, isFecthing, fetched } = props;
+  const { error, isFecthing, fetched, nodata } = props;
+
+  const wrapInNotice = elm => <div className="notice">{elm}</div>;
 
   let elm = null;
   if (isFecthing === true) {
-    elm = (
-      <div className="notice">
-        <CircularProgress style={{ color: blue[500] }} size={100} />
-      </div>
+    elm = wrapInNotice(
+      <CircularProgress style={{ color: blue[500] }} size={100} />
     );
   } else if (error === true) {
-    elm = (
-      <div className="notice">
-        <p className="noteice-text">Something is worng</p>
-      </div>
-    );
+    elm = wrapInNotice(<p className="noteice-text">Something is worng</p>);
   } else if (fetched === false) {
-    elm = (
-      <div className="notice">
-        <p className="notice-text">Select your destination</p>
-      </div>
+    elm = wrapInNotice(<p className="notice-text">Select your destination</p>);
+  } else if (nodata === true) {
+    elm = wrapInNotice(
+      <p className="notice-text">No avalibale houses for this destination</p>
     );
   } else {
     elm = <Dashboard />;
   }
+
   return (
     <div>
       <SimpleAppBar />
@@ -41,8 +38,8 @@ const App = props => {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  const { error, isFecthing, fetched } = state;
-  return { error, isFecthing, fetched };
+  const { error, isFecthing, fetched, nodes } = state;
+  return { error, isFecthing, fetched, nodata: nodes.length === 0 };
 };
 
 export default connect(mapStateToProps, () => ({}))(App);
