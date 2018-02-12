@@ -26,6 +26,8 @@ class SearchBar extends Component {
     // https://stackoverflow.com/questions/31446751/how-to-get-password-field-value-in-reacts-material-ui/47329368#47329368
     return (
       <TextField
+        placeholder="Search for your destination"
+        autoFocus
         fullWidth
         inputRef={el => (this.el = el)}
         onKeyPress={ev => {

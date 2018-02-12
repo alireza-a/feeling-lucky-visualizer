@@ -8,13 +8,12 @@ import Grid from 'material-ui/Grid';
 import PriceByTravelDurationScatterPlot from './PriceByTravelDurationScatterPlot';
 import ShortestDistanceMap from './ShortestDistanceMap';
 import ImageGrid from './ImageGrid';
-import SearchBar from './SearchBar';
+import AppBar from '../components/AppBar';
 
 const spacing = 16;
 const style = {
   root: {
-    flexGrow: 1,
-    marginTop: 30
+    flexGrow: 1
   },
   paper: {
     padding: 10,
@@ -64,7 +63,7 @@ class App extends Component {
   }
 
   getComponentMaxHeight() {
-    let height = this.state.height - 150;
+    let height = this.state.height - 200;
     return Math.max(height / 2, 280);
   }
 
@@ -99,6 +98,9 @@ class App extends Component {
     return (
       <div className={classes.root}>
         <Grid container spacing={spacing}>
+          <Grid item xs={12}>
+            <AppBar />
+          </Grid>
           <Grid item xs={12} md={6}>
             <Grid container spacing={spacing}>
               {wrapInPaper(
@@ -115,11 +117,6 @@ class App extends Component {
               {wrapInPaper(
                 <ShortestDistanceMap width={width} maxHeight={maxHeight} />
               )}
-              <Grid item xs={12}>
-                <Paper className={classes.paper}>
-                  <SearchBar />
-                </Paper>
-              </Grid>
             </Grid>
           </Grid>
         </Grid>
