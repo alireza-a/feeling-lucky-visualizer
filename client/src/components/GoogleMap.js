@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { GoogleApiWrapper } from 'google-maps-react';
-import config from '../config.json';
 import ReactDOM from 'react-dom';
 
 export class GoogleMap extends Component {
+  state = { key: "" }
+
   componentDidUpdate(prevProps) {
     let { origin, width, maxHeight, google } = prevProps;
+    this.fetchKey();
     if (
       (google !== this.props.google || // initial setup
         origin !== this.props.origin) && // when origin changes
@@ -14,6 +16,13 @@ export class GoogleMap extends Component {
     ) {
       this.loadMap();
     }
+  }
+
+  fetchKey(){
+    //Geting the key and storing it in the state.
+    fetch('http://localhost:5000/key')
+    .then(res => res.json())
+    .then(key => this.setState({key}));
   }
 
   loadMap() {
@@ -62,5 +71,5 @@ export class GoogleMap extends Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: config.key
+  apiKey: this.state
 })(GoogleMap);
