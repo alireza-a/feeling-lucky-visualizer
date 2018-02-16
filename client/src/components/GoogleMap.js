@@ -4,10 +4,14 @@ import ReactDOM from 'react-dom';
 
 export class GoogleMap extends Component {
   state = { key: "" }
+  constructor(props)
+  {
+    super(props);
+    this.fetchKey();
+  }
 
   componentDidUpdate(prevProps) {
     let { origin, width, maxHeight, google } = prevProps;
-    this.fetchKey();
     if (
       (google !== this.props.google || // initial setup
         origin !== this.props.origin) && // when origin changes
