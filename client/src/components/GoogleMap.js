@@ -4,8 +4,7 @@ import ReactDOM from 'react-dom';
 
 export class GoogleMap extends Component {
   state = { key: "" }
-  constructor(props)
-  {
+  constructor(props){
     super(props);
     this.fetchKey();
   }
@@ -26,7 +25,8 @@ export class GoogleMap extends Component {
     //Geting the key and storing it in the state.
     fetch('http://localhost:5000/key')
     .then(res => res.json())
-    .then(key => this.setState({key}));
+    .then(key => this.setState({key}))
+    .catch(err => console.log(err));
   }
 
   loadMap() {
